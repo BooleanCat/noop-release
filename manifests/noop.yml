@@ -1,0 +1,26 @@
+name: ((deployment))
+
+releases:
+- name: noop
+  version: latest
+
+stemcells:
+- alias: stemcell
+  os: ((stemcell-os))
+  version: latest
+
+instance_groups:
+- name: garden
+  instances: 1
+  vm_type: ((vm))
+  networks:
+  - name: ((network))
+  azs: [((az))]
+  stemcell: stemcell
+  jobs: []
+
+update:
+  canaries: 1
+  max_in_flight: 3
+  canary_watch_time: 1000-240000
+  update_watch_time: 1000-240000
